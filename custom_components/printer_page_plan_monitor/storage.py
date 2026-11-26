@@ -37,6 +37,7 @@ class BillingState:
 
 class BillingStore:
     def __init__(self, hass: HomeAssistant, entry_id: str) -> None:
+        self._last_saved: dict[str, Any] | None = None
         self._store: Store[dict[str, Any]] = Store(
             hass, STORAGE_VERSION, f"{STORAGE_KEY}.{entry_id}"
         )
@@ -45,11 +46,19 @@ class BillingStore:
         data = await self._store.async_load()
         if not data:
             return None
-        return BillingState.from_dict(data)
+        state = BillingState.from_dict(data)
+        if state is not None:
+            self._last_saved = asdict(state)
+        return state
 
     async def save(self, state: BillingState) -> None:
-        await self._store.async_save(asdict(state))
+        data = asdict(state)
+        if data == self._last_saved:
+            return
+        await self._store.async_save(data)
+        self._last_saved = data
 
     async def delete(self) -> None:
         """Delete persisted billing state for a removed config entry."""
         await self._store.async_remove()
+        self._last_saved = None
