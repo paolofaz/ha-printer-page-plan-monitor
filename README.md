@@ -1,5 +1,7 @@
 # Printer Page Plan Monitor for HP Instant Ink
 
+[![Release](https://img.shields.io/github/v/release/paolofaz/ha-printer-page-plan-monitor)](https://github.com/paolofaz/ha-printer-page-plan-monitor/releases/latest)
+
 **Printer Page Plan Monitor for HP Instant Ink** is an unofficial Home Assistant custom integration for tracking page allowance, rollover pages, renewal cycles, and ink levels on compatible HP Instant Ink printers using local EWS/LEDM data.
 
 It was developed and tested with an **HP OfficeJet 8010 series printer enrolled in HP Instant Ink**, using the local `SubscriptionImpressions` counter exposed by the printer. Other compatible HP printers exposing the same LEDM data may also work.
@@ -15,7 +17,7 @@ It was developed and tested with an **HP OfficeJet 8010 series printer enrolled 
 - Handles monthly renewal and carries unused monthly pages into rollover up to a user-configured cap.
 - Reads black, cyan, magenta and yellow ink levels when exposed by the printer.
 - Polls locally every 120 seconds.
-- Persists billing state across Home Assistant restarts.
+- Persists billing state across Home Assistant restarts; since v1.0.3 unchanged billing state is not rewritten to disk.
 - Supports manual realignment from the integration options.
 - Provides diagnostics and removes its own stored billing state when the config entry is deleted.
 - Includes original vendor-neutral branding locally in the integration.
@@ -43,7 +45,7 @@ The subscription page balance itself is initialized from the values the user see
 Until this repository is included in the default HACS catalog:
 
 1. Open HACS.
-2. Add `https://github.com/paolofaz/printer-page-plan-monitor` as a **Custom repository**.
+2. Add `https://github.com/paolofaz/ha-printer-page-plan-monitor` as a **Custom repository**.
 3. Select category **Integration**.
 4. Install **Printer Page Plan Monitor for HP Instant Ink**.
 5. Restart Home Assistant.
