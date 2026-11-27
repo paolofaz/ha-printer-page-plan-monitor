@@ -42,6 +42,8 @@ The subscription page balance itself is initialized from the values the user see
 
 ## Installation with HACS
 
+The maintained Home Assistant baseline is **2026.11.0** (declared in `hacs.json`). Earlier versions are not certified; an automated import check uses the declared HA Core version.
+
 Until this repository is included in the default HACS catalog:
 
 1. Open HACS.
